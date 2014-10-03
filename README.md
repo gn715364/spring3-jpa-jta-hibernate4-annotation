@@ -19,17 +19,19 @@ spring3-jpa-jta-hibernate4-annotation
 在com.gn.sub.config的JpaHibernateAConfig 跟 JpaHibernateBConfig
 
 
-         @Bean(name = "dataSource1", initMethod = "init" , destroyMethod = "close")
-         public AtomikosDataSourceBean setAtomikosDataSourceBean() {
-             AtomikosDataSourceBean atomikosDataSourceBean = new AtomikosDataSourceBean();
-             atomikosDataSourceBean.setUniqueResourceName("DataSource1");
-             
-             
-             
-             
-             
-             
-         }
+     @Bean(name = "dataSource1", initMethod = "init" , destroyMethod = "close")
+     public AtomikosDataSourceBean setAtomikosDataSourceBean() {
+       AtomikosDataSourceBean atomikosDataSourceBean = new AtomikosDataSourceBean();
+       atomikosDataSourceBean.setUniqueResourceName("DataSource1");
+       atomikosDataSourceBean.setPoolSize(10);
+       Properties p = new Properties();
+       p.setProperty("user","root");
+       p.setProperty("password", "1234");
+       p.setProperty("url", "jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf-8");
+       p.setProperty("pinGlobalTxToPhysicalConnection", "true");
+       atomikosDataSourceBean.setXaProperties(p);
+       return atomikosDataSourceBean;
+     }
          
 ==========================
 參考鏈結：<br>
